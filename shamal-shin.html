@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shamal Shin — Construction &amp; Design, Yerevan</title>
+<meta name="description" content="Shamal Shin — full-cycle construction, design, supervision and execution in Yerevan, Armenia. Houses, apartments, villas, sheds, welding and metalwork.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue-deep:#0E2A47;
+    --blue-mid:#1B3A5C;
+    --steel:#4B5563;
+    --steel-soft:#6B7580;
+    --silver:#9CA6B0;
+    --silver-pale:#C7CDD3;
+    --charcoal:#0A1B2E;
+    --charcoal-soft:#13293F;
+    --white:#F4F5F6;
+    --white-dim:#DCDFE2;
+    --line: rgba(120,158,198,0.25);
+    --line-strong: rgba(150,182,214,0.48);
+    --font-display:'Oswald', sans-serif;
+    --font-body:'IBM Plex Sans', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+    --max: 1280px;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background: var(--charcoal);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-weight:300;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+  ul{ list-style:none; }
+
+  ::selection{ background: var(--blue-mid); color:var(--white); }
+
+  :focus-visible{
+    outline: 2px solid var(--silver-pale);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
+  }
+
+  .wrap{
+    max-width: var(--max);
+    margin:0 auto;
+    padding:0 40px;
+  }
+
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color: var(--silver);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    display:inline-block;
+    width:22px;
+    height:1px;
+    background: var(--silver-pale);
+  }
+
+  h1,h2,h3{
+    font-family: var(--font-display);
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    color: var(--white);
+  }
+
+  /* ---------------- HEADER ---------------- */
+  header{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:100;
+    background: rgba(20,22,26,0.86);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:76px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    line-height:1.05;
+  }
+  .brand-icon{
+    height:34px;
+    width:auto;
+    display:block;
+  }
+  .brand-text{
+    display:flex;
+    flex-direction:column;
+  }
+  .brand-mark{
+    font-family:var(--font-display);
+    font-size:20px;
+    font-weight:700;
+    letter-spacing:0.06em;
+    color:var(--white);
+  }
+  .brand-sub{
+    font-family:var(--font-mono);
+    font-size:10px;
+    letter-spacing:0.18em;
+    color:var(--silver);
+    margin-top:2px;
+  }
+  .nav-links{
+    display:flex;
+    gap:34px;
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+  }
+  .nav-links a{
+    position:relative;
+    color:var(--silver-pale);
+    padding-bottom:4px;
+    transition:color .2s ease;
+  }
+  .nav-links a::after{
+    content:"";
+    position:absolute; left:0; bottom:0;
+    width:0; height:1px;
+    background:var(--white);
+    transition:width .25s ease;
+  }
+  .nav-links a:hover{ color:var(--white); }
+  .nav-links a:hover::after{ width:100%; }
+  .nav-cta{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    border:1px solid var(--line-strong);
+    padding:9px 18px;
+    transition: background .2s ease, color .2s ease;
+  }
+  .nav-cta:hover{ background:var(--blue-mid); color:var(--white); border-color:var(--blue-mid); }
+  .nav-toggle{ display:none; }
+
+  /* ---------------- HERO ---------------- */
+  .hero{
+    padding-top:76px;
+    min-height:100vh;
+    display:grid;
+    grid-template-columns: 1.05fr 0.95fr;
+  }
+  .hero-left{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:60px 64px 60px 40px;
+    position:relative;
+  }
+  .hero-left::after{
+    content:"";
+    position:absolute; right:0; top:0; bottom:0;
+    width:1px;
+    background:var(--line);
+  }
+  .hero-eyebrow{ margin-bottom:26px; }
+  .hero h1{
+    font-size: clamp(42px, 5.2vw, 76px);
+    line-height:1.02;
+    max-width:640px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--silver-pale);
+  }
+  .hero-desc{
+    margin-top:26px;
+    max-width:460px;
+    font-size:16px;
+    color:var(--white-dim);
+  }
+  .hero-ru{
+    margin-top:14px;
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--silver);
+    letter-spacing:0.02em;
+  }
+  .hero-ctas{
+    display:flex;
+    gap:16px;
+    margin-top:40px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    padding:15px 28px;
+    border:1px solid var(--line-strong);
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+  }
+  .btn-solid{ background:var(--blue-mid); color:var(--white); border-color:var(--blue-mid); }
+  .btn-solid:hover{ background:transparent; color:var(--white); border-color:var(--line-strong); }
+  .btn-ghost:hover{ background:var(--blue-mid); color:var(--white); border-color:var(--blue-mid); }
+
+  .hero-meta{
+    display:flex;
+    gap:40px;
+    margin-top:56px;
+    font-family:var(--font-mono);
+    font-size:11px;
+    color:var(--steel-soft);
+    letter-spacing:0.08em;
+  }
+  .hero-meta span{ display:block; }
+  .hero-meta strong{ color:var(--silver-pale); display:block; font-size:13px; margin-bottom:4px; }
+
+  .hero-right{
+    position:relative;
+    background:
+      linear-gradient(160deg, var(--blue-deep) 0%, var(--blue-mid) 55%, var(--charcoal-soft) 100%);
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .blueprint-grid{
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 44px 44px;
+    opacity:0.5;
+  }
+  .hero-right::before{
+    content:"";
+    position:absolute; inset:0;
+    background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.06), transparent 55%);
+  }
+  .brand-plate{
+    position:relative;
+    z-index:2;
+    background: linear-gradient(180deg, #F4F5F6 0%, #E4E7EA 100%);
+    padding: 40px 52px;
+    box-shadow: 0 30px 70px rgba(3,10,20,0.45);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .brand-plate img{
+    width: clamp(180px, 16vw, 260px);
+    height:auto;
+    display:block;
+  }
+  .coord-tag{
+    position:absolute;
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.14em;
+    color: var(--silver-pale);
+  }
+  .coord-tl{ top:36px; left:36px; }
+  .coord-br{ bottom:36px; right:36px; text-align:right; }
+  .corner{
+    position:absolute;
+    width:26px; height:26px;
+    border-color: var(--silver-pale);
+  }
+  .corner-tl{ top:30px; left:30px; border-top:1px solid; border-left:1px solid; }
+  .corner-tr{ top:30px; right:30px; border-top:1px solid; border-right:1px solid; }
+  .corner-bl{ bottom:30px; left:30px; border-bottom:1px solid; border-left:1px solid; }
+  .corner-br{ bottom:30px; right:30px; border-bottom:1px solid; border-right:1px solid; }
+
+  /* ---------------- SECTION SHELL ---------------- */
+  section{
+    padding:120px 0;
+    border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:40px;
+    margin-bottom:64px;
+    flex-wrap:wrap;
+  }
+  .section-head h2{
+    font-size:clamp(30px, 3.4vw, 46px);
+    max-width:640px;
+  }
+  .section-head p{
+    max-width:360px;
+    color:var(--silver);
+    font-size:14px;
+  }
+
+  /* ---------------- ABOUT ---------------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:80px;
+    align-items:start;
+  }
+  .about-copy p{
+    color:var(--white-dim);
+    font-size:16px;
+    margin-bottom:20px;
+    max-width:520px;
+  }
+  .about-stats{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .stat{
+    background:var(--charcoal);
+    padding:30px 26px;
+  }
+  .stat-num{
+    font-family:var(--font-display);
+    font-size:38px;
+    color:var(--white);
+    font-weight:600;
+  }
+  .stat-label{
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--silver);
+    margin-top:8px;
+  }
+
+  /* ---------------- SERVICES ---------------- */
+  .services-list{
+    border-top:1px solid var(--line);
+  }
+  .service-row{
+    display:grid;
+    grid-template-columns: 90px 1fr 1.1fr;
+    gap:40px;
+    padding:34px 0;
+    border-bottom:1px solid var(--line);
+    align-items:center;
+    transition: padding-left .25s ease;
+  }
+  .service-row:hover{ padding-left:14px; }
+  .service-num{
+    font-family:var(--font-mono);
+    font-size:13px;
+    color:var(--silver);
+  }
+  .service-name{
+    font-family:var(--font-display);
+    font-size:22px;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    color:var(--white);
+  }
+  .service-desc{
+    font-size:14px;
+    color:var(--silver-pale);
+    max-width:480px;
+  }
+
+  /* ---------------- GALLERY ---------------- */
+  .gallery-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:2px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .panel{
+    background:var(--charcoal-soft);
+    aspect-ratio: 4/3;
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding:22px;
+  }
+  .panel::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(156,166,176,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(156,166,176,0.08) 1px, transparent 1px);
+    background-size:28px 28px;
+  }
+  .panel-corner{
+    position:absolute;
+    width:16px; height:16px;
+    border-color: var(--silver);
+    z-index:2;
+  }
+  .panel .panel-corner.tl{ top:14px; left:14px; border-top:1px solid; border-left:1px solid; }
+  .panel .panel-corner.tr{ top:14px; right:14px; border-top:1px solid; border-right:1px solid; }
+  .panel .panel-corner.bl{ bottom:14px; left:14px; border-bottom:1px solid; border-left:1px solid; }
+  .panel .panel-corner.br{ bottom:14px; right:14px; border-bottom:1px solid; border-right:1px solid; }
+  .panel-top{
+    display:flex;
+    justify-content:space-between;
+    font-family:var(--font-mono);
+    font-size:11px;
+    color:var(--silver);
+    letter-spacing:0.1em;
+    position:relative;
+    z-index:2;
+  }
+  .panel-icon{
+    position:relative;
+    z-index:2;
+    margin:auto;
+    opacity:0.85;
+  }
+  .panel-icon svg{ width:52px; height:52px; stroke:var(--silver-pale); }
+  .panel-bottom{
+    position:relative;
+    z-index:2;
+  }
+  .panel-cat{
+    font-family:var(--font-display);
+    font-size:16px;
+    text-transform:uppercase;
+    color:var(--white);
+    letter-spacing:0.02em;
+  }
+  .panel-status{
+    font-family:var(--font-mono);
+    font-size:10px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--steel-soft);
+    margin-top:4px;
+  }
+  .panel.has-photo{ padding:0; }
+  .panel.has-photo::before{ display:none; }
+  .panel-photo{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit: cover;
+    object-position: center 35%;
+    z-index:1;
+    filter: saturate(0.94) contrast(1.03);
+  }
+  .panel.has-photo::after{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(10,27,46,0.05) 0%, rgba(10,27,46,0.15) 55%, rgba(10,27,46,0.88) 100%);
+    z-index:2;
+  }
+  .panel.has-photo .panel-top,
+  .panel.has-photo .panel-bottom{ z-index:3; }
+  .panel.has-photo .panel-top span{
+    background: rgba(10,27,46,0.55);
+    padding:3px 7px;
+    backdrop-filter: blur(2px);
+  }
+
+  .gallery-note{
+    margin-top:28px;
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--steel-soft);
+    letter-spacing:0.04em;
+  }
+
+  /* ---------------- PROCESS ---------------- */
+  .process-list{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .process-step{
+    background:var(--charcoal);
+    padding:36px 28px;
+    min-height:220px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+  .process-index{
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--silver);
+  }
+  .process-title{
+    font-family:var(--font-display);
+    font-size:19px;
+    text-transform:uppercase;
+    color:var(--white);
+    margin-top:34px;
+  }
+  .process-desc{
+    font-size:13.5px;
+    color:var(--silver-pale);
+    margin-top:12px;
+  }
+
+  /* ---------------- CONTACT ---------------- */
+  .contact-grid{
+    display:grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap:80px;
+  }
+  .contact-title{
+    font-size:clamp(34px, 4vw, 54px);
+    max-width:520px;
+    line-height:1.05;
+  }
+  .contact-sub{
+    color:var(--silver-pale);
+    font-size:15px;
+    margin-top:22px;
+    max-width:440px;
+  }
+  .contact-list{
+    border-top:1px solid var(--line);
+  }
+  .contact-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:22px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .contact-item .label{
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--silver);
+  }
+  .contact-item .value{
+    font-family:var(--font-display);
+    font-size:19px;
+    color:var(--white);
+    letter-spacing:0.01em;
+  }
+  .contact-item a.value:hover{ color:var(--silver-pale); }
+
+  /* ---------------- FOOTER ---------------- */
+  footer{
+    padding:44px 0;
+  }
+  .footer-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+  .footer-brand{
+    font-family:var(--font-display);
+    font-size:16px;
+    letter-spacing:0.08em;
+    color:var(--white);
+  }
+  .footer-meta{
+    font-family:var(--font-mono);
+    font-size:11px;
+    color:var(--steel-soft);
+    letter-spacing:0.06em;
+  }
+
+  /* ---------------- RESPONSIVE ---------------- */
+  @media (max-width: 980px){
+    .wrap{ padding:0 24px; }
+    .nav-links{ display:none; }
+    .hero{ grid-template-columns:1fr; }
+    .hero-left{ padding:52px 24px; }
+    .hero-left::after{ display:none; }
+    .hero-right{ min-height:60vh; }
+    .about-grid{ grid-template-columns:1fr; gap:44px; }
+    .service-row{ grid-template-columns:50px 1fr; grid-template-areas: "num name" "desc desc"; }
+    .service-row .service-desc{ grid-column:1/-1; margin-top:10px; }
+    .gallery-grid{ grid-template-columns: repeat(2, 1fr); }
+    .process-list{ grid-template-columns: repeat(2, 1fr); }
+    .contact-grid{ grid-template-columns:1fr; gap:48px; }
+    section{ padding:80px 0; }
+  }
+  @media (max-width: 560px){
+    .gallery-grid{ grid-template-columns: 1fr; }
+    .process-list{ grid-template-columns: 1fr; }
+    .hero-meta{ flex-wrap:wrap; row-gap:20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <img class="brand-icon" src="images/logo-icon.png" alt="Shamal Shin mark">
+      <div class="brand-text">
+        <span class="brand-mark">SHAMAL SHIN</span>
+        <span class="brand-sub">ШАМАЛ ШИН · YEREVAN</span>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" style="padding:0; border-bottom:none;">
+    <div class="hero-left">
+      <div class="eyebrow hero-eyebrow">Construction &amp; Design — Yerevan, Armenia</div>
+      <h1>From Foundation <em>to</em> Finish.</h1>
+      <p class="hero-desc">Shamal Shin plans, builds, and supervises houses, apartments, villas, and agricultural structures across Armenia — design, workforce, welding, and execution, managed under one roof.</p>
+      <p class="hero-ru">Строительство и проектирование — полный цикл, Ереван.</p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn btn-solid">View Projects</a>
+        <a href="#contact" class="btn btn-ghost">Start a Project</a>
+      </div>
+      <div class="hero-meta">
+        <span><strong>Design + Build</strong>Full-cycle project support</span>
+        <span><strong>On-Site</strong>Direct supervision &amp; labor</span>
+        <span><strong>EN / RU</strong>Yerevan, Armenia</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="blueprint-grid"></div>
+      <div class="corner corner-tl"></div>
+      <div class="corner corner-tr"></div>
+      <div class="corner corner-bl"></div>
+      <div class="corner corner-br"></div>
+      <div class="coord-tag coord-tl">SHAMAL SHIN LLC<br>ШАМАЛ ШИН</div>
+      <div class="brand-plate"><img src="images/logo-full.png" alt="Shamal Shin — Дизайн · Надзор · Реализация"></div>
+      <div class="coord-tag coord-br">40.1792° N, 44.4991° E<br>YEREVAN, ARMENIA</div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Built by people who work the site, not just the drawing.</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-copy">
+          <p>Shamal Shin is a construction and design company based in Yerevan, led by Shamal Dolatkhah (Mojtaba). We take on the full scope of a build — from initial design and planning through on-site supervision, skilled labor, welding and metalwork, to final execution and handover.</p>
+          <p>We work across residential and agricultural projects: private houses, apartment buildings, villas, sheds and utility structures. Every project is managed directly, with one point of contact from first drawing to final wall.</p>
+          <p style="color:var(--silver); font-family:var(--font-mono); font-size:12.5px;">Работаем на английском и русском языках.</p>
+        </div>
+        <div class="about-stats">
+          <div class="stat">
+            <div class="stat-num">01</div>
+            <div class="stat-label">Point of Contact</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">EN/RU</div>
+            <div class="stat-label">Languages Spoken</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">On-Site Supervision</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">YSN</div>
+            <div class="stat-label">Based in Yerevan</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Services</h2>
+        <p>Six disciplines, coordinated as one project — not six separate contractors.</p>
+      </div>
+      <div class="services-list">
+        <div class="service-row">
+          <div class="service-num">01</div>
+          <div class="service-name">Design</div>
+          <div class="service-desc">Planning and design work for residential and agricultural structures, developed around how the space will actually be used.</div>
+        </div>
+        <div class="service-row">
+          <div class="service-num">02</div>
+          <div class="service-name">Supervision</div>
+          <div class="service-desc">Direct, on-site oversight through every phase of construction — quality, sequencing, and safety kept under one authority.</div>
+        </div>
+        <div class="service-row">
+          <div class="service-num">03</div>
+          <div class="service-name">Execution</div>
+          <div class="service-desc">Hands-on construction and build-out, from groundwork to finishing, carried out by our own coordinated teams.</div>
+        </div>
+        <div class="service-row">
+          <div class="service-num">04</div>
+          <div class="service-name">Labor Coordination</div>
+          <div class="service-desc">Skilled workers organized and managed as one crew, scheduled against a single project timeline.</div>
+        </div>
+        <div class="service-row">
+          <div class="service-num">05</div>
+          <div class="service-name">Houses, Apartments &amp; Villas</div>
+          <div class="service-desc">Full builds for private houses, apartment projects, and villas, from foundation through handover.</div>
+        </div>
+        <div class="service-row">
+          <div class="service-num">06</div>
+          <div class="service-name">Welding &amp; Metalwork</div>
+          <div class="service-desc">Structural welding and metal fabrication, including sheds and agricultural structures built to hold up under real use.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS / GALLERY -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Projects</h2>
+        <p>A living record of what we build. Photos from active and completed sites are added here as projects close out.</p>
+      </div>
+      <div class="gallery-grid">
+
+        <div class="panel">
+          <div class="panel-corner tl"></div><div class="panel-corner tr"></div>
+          <div class="panel-corner bl"></div><div class="panel-corner br"></div>
+          <div class="panel-top"><span>H-01</span><span>ДОМА</span></div>
+          <div class="panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.2"><path d="M3 11L12 4l9 7"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-6h4v6"/></svg></div>
+          <div class="panel-bottom">
+            <div class="panel-cat">Houses</div>
+            <div class="panel-status">Photos coming soon</div>
+          </div>
+        </div>
+
+        <div class="panel has-photo">
+          <img class="panel-photo" src="images/project-hotel.jpg" alt="ABNUS — apartment building project by Shamal Shin">
+          <div class="panel-corner tl"></div><div class="panel-corner tr"></div>
+          <div class="panel-corner bl"></div><div class="panel-corner br"></div>
+          <div class="panel-top"><span>A-01</span><span>КВАРТИРЫ</span></div>
+          <div class="panel-bottom">
+            <div class="panel-cat">Apartments — "ABNUS"</div>
+            <div class="panel-status">Completed project</div>
+          </div>
+        </div>
+
+        <div class="panel has-photo">
+          <img class="panel-photo" src="images/project-villa.jpg" alt="Single pool villa concept by Shamal Shin" style="object-position:center 20%;">
+          <div class="panel-corner tl"></div><div class="panel-corner tr"></div>
+          <div class="panel-corner bl"></div><div class="panel-corner br"></div>
+          <div class="panel-top"><span>V-01</span><span>ВИЛЛЫ</span></div>
+          <div class="panel-bottom">
+            <div class="panel-cat">Villas</div>
+            <div class="panel-status">Design concept</div>
+          </div>
+        </div>
+
+        <div class="panel has-photo">
+          <img class="panel-photo" src="images/project-shed.jpg" alt="Industrial steel shed project by Shamal Shin">
+          <div class="panel-corner tl"></div><div class="panel-corner tr"></div>
+          <div class="panel-corner bl"></div><div class="panel-corner br"></div>
+          <div class="panel-top"><span>S-01</span><span>АНГАРЫ</span></div>
+          <div class="panel-bottom">
+            <div class="panel-cat">Sheds &amp; Agricultural</div>
+            <div class="panel-status">Completed project</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-corner tl"></div><div class="panel-corner tr"></div>
+          <div class="panel-corner bl"></div><div class="panel-corner br"></div>
+          <div class="panel-top"><span>W-01</span><span>СВАРКА</span></div>
+          <div class="panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.2"><path d="M4 20L20 4M13 4l7 7M4 13l7 7"/><path d="M17 2l2 2-2 2M20 5l2-2"/></svg></div>
+          <div class="panel-bottom">
+            <div class="panel-cat">Welding &amp; Metalwork</div>
+            <div class="panel-status">Photos coming soon</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-corner tl"></div><div class="panel-corner tr"></div>
+          <div class="panel-corner bl"></div><div class="panel-corner br"></div>
+          <div class="panel-top"><span>P-01</span><span>ПРОЦЕСС</span></div>
+          <div class="panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <div class="panel-bottom">
+            <div class="panel-cat">Site &amp; Process</div>
+            <div class="panel-status">Photos coming soon</div>
+          </div>
+        </div>
+
+      </div>
+      <p class="gallery-note">// Gallery structure ready for upload — each panel accepts a project photo without changing layout.</p>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>How a project moves</h2>
+        <p>The same sequence, every time — so nothing depends on memory or improvisation.</p>
+      </div>
+      <div class="process-list">
+        <div class="process-step">
+          <div class="process-index">01</div>
+          <div><div class="process-title">Consultation</div><div class="process-desc">We review the site, the goal, and the constraints before anything is drawn.</div></div>
+        </div>
+        <div class="process-step">
+          <div class="process-index">02</div>
+          <div><div class="process-title">Design &amp; Planning</div><div class="process-desc">A design is developed and agreed on before ground is broken.</div></div>
+        </div>
+        <div class="process-step">
+          <div class="process-index">03</div>
+          <div><div class="process-title">Supervision &amp; Execution</div><div class="process-desc">Our crews build, weld, and finish, supervised on-site from start to close.</div></div>
+        </div>
+        <div class="process-step">
+          <div class="process-index">04</div>
+          <div><div class="process-title">Handover</div><div class="process-desc">A completed, inspected structure — ready to use.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <div class="eyebrow">Contact</div>
+        <h2 class="contact-title" style="margin-top:20px;">Tell us what you're building.</h2>
+        <p class="contact-sub">Reach out directly — by phone, WhatsApp, or email. We respond in English or Russian.</p>
+        <p class="contact-sub" style="font-family:var(--font-mono); font-size:12px; color:var(--steel-soft); margin-top:30px;">Свяжитесь с нами — по телефону, WhatsApp или email.</p>
+      </div>
+      <div class="contact-list">
+        <div class="contact-item">
+          <span class="label">Phone</span>
+          <a class="value" href="tel:+37496472300">+374 96 472300</a>
+        </div>
+        <div class="contact-item">
+          <span class="label">Phone</span>
+          <a class="value" href="tel:+37499472300">+374 99 472300</a>
+        </div>
+        <div class="contact-item">
+          <span class="label">WhatsApp</span>
+          <a class="value" href="https://wa.me/37496472300" target="_blank" rel="noopener">+374 96 472300</a>
+        </div>
+        <div class="contact-item">
+          <span class="label">Email</span>
+          <a class="value" href="mailto:ShamalShin24@gmail.com">ShamalShin24@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <span class="label">Location</span>
+          <span class="value">Yerevan, Armenia</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <div class="footer-brand">SHAMAL SHIN LLC</div>
+    <div class="footer-meta">YEREVAN, ARMENIA — © <span id="year"></span> SHAMAL SHIN. ALL RIGHTS RESERVED.</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
