@@ -165,12 +165,61 @@
   .nav-cta:hover{ background:var(--blue-mid); color:var(--white); border-color:var(--blue-mid); }
   .nav-toggle{ display:none; }
 
+  main{ padding-top:76px; }
+
+  .nav-links a.active{ color:var(--white); }
+  .nav-links a.active::after{ width:100%; }
+
+  .nav-toggle-btn{
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    gap:5px;
+    width:26px;
+    height:20px;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:0;
+  }
+  .nav-toggle-btn span{
+    display:block;
+    width:100%;
+    height:1.5px;
+    background:var(--silver-pale);
+  }
+
+  .nav-right{
+    display:flex;
+    align-items:center;
+    gap:22px;
+  }
+  .lang-switch{
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .flag-btn{
+    display:flex;
+    width:30px;
+    height:20px;
+    padding:0;
+    border:1px solid var(--line-strong);
+    background:transparent;
+    cursor:pointer;
+    opacity:0.42;
+    transition: opacity .2s ease, border-color .2s ease;
+  }
+  .flag-btn svg{ width:100%; height:100%; display:block; }
+  .flag-btn:hover{ opacity:0.75; }
+  .flag-btn.active{ opacity:1; border-color:var(--silver-pale); }
+
   /* ---------------- HERO ---------------- */
   .hero{
-    padding-top:76px;
-    min-height:100vh;
+    min-height: calc(100vh - 76px);
     display:grid;
     grid-template-columns: 1.05fr 0.95fr;
+    border-bottom:none;
   }
   .hero-left{
     display:flex;
@@ -600,7 +649,25 @@
   /* ---------------- RESPONSIVE ---------------- */
   @media (max-width: 980px){
     .wrap{ padding:0 24px; }
-    .nav-links{ display:none; }
+    .nav-toggle-btn{ display:flex; }
+    .nav-links{
+      position:absolute;
+      top:76px; left:0; right:0;
+      flex-direction:column;
+      align-items:stretch;
+      gap:0;
+      background: rgba(10,27,46,0.97);
+      border-bottom:1px solid var(--line);
+      max-height:0;
+      overflow:hidden;
+      transition: max-height .3s ease;
+    }
+    .nav-links.open{ max-height:420px; }
+    .nav-links a{
+      padding:16px 24px;
+      border-bottom:1px solid var(--line);
+    }
+    .nav-right{ gap:14px; }
     .hero{ grid-template-columns:1fr; }
     .hero-left{ padding:52px 24px; }
     .hero-left::after{ display:none; }
@@ -624,41 +691,65 @@
 
 <header>
   <div class="wrap nav">
-    <div class="brand">
+    <a href="#home" class="brand">
       <img class="brand-icon" src="images/logo-icon.jpg" alt="Shamal Shin mark">
       <div class="brand-text">
         <span class="brand-mark">SHAMAL SHIN</span>
         <span class="brand-sub">ШАМАЛ ШИН · YEREVAN</span>
       </div>
-    </div>
+    </a>
     <nav class="nav-links">
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#projects">Projects</a>
-      <a href="#process">Process</a>
-      <a href="#contact">Contact</a>
+      <a href="#home" class="i18n" data-en="Home" data-ru="Главная">Home</a>
+      <a href="#about" class="i18n" data-en="About" data-ru="О компании">About</a>
+      <a href="#services" class="i18n" data-en="Services" data-ru="Услуги">Services</a>
+      <a href="#projects" class="i18n" data-en="Projects" data-ru="Проекты">Projects</a>
+      <a href="#process" class="i18n" data-en="Process" data-ru="Процесс">Process</a>
+      <a href="#contact" class="i18n" data-en="Contact" data-ru="Контакты">Contact</a>
     </nav>
-    <a href="#contact" class="nav-cta">Get in touch</a>
+    <div class="nav-right">
+      <button class="nav-toggle-btn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="lang-switch">
+        <button class="flag-btn active" data-lang="en" aria-label="Switch to English" title="English">
+          <svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+            <rect width="60" height="30" fill="#0A2A66"/>
+            <path d="M0,0 L60,30 M60,0 L0,30" stroke="#FFFFFF" stroke-width="6"/>
+            <path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="2"/>
+            <path d="M30,0 V30 M0,15 H60" stroke="#FFFFFF" stroke-width="10"/>
+            <path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"/>
+          </svg>
+        </button>
+        <button class="flag-btn" data-lang="ru" aria-label="Переключить на русский" title="Русский">
+          <svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+            <rect width="60" height="10" y="0" fill="#FFFFFF"/>
+            <rect width="60" height="10" y="10" fill="#0039A6"/>
+            <rect width="60" height="10" y="20" fill="#D52B1E"/>
+          </svg>
+        </button>
+      </div>
+      <a href="#contact" class="nav-cta i18n" data-en="Get in touch" data-ru="Связаться">Get in touch</a>
+    </div>
   </div>
 </header>
 
 <main>
 
-  <!-- HERO -->
-  <section class="hero" style="padding:0; border-bottom:none;">
+  <!-- HOME -->
+  <section id="home" class="hero app-page">
     <div class="hero-left">
-      <div class="eyebrow hero-eyebrow">Construction &amp; Design — Yerevan, Armenia</div>
-      <h1>From Foundation <em>to</em> Finish.</h1>
-      <p class="hero-desc">Shamal Shin plans, builds, and supervises houses, apartments, villas, and agricultural structures across Armenia — design, workforce, welding, and execution, managed under one roof.</p>
-      <p class="hero-ru">Строительство и проектирование — полный цикл, Ереван.</p>
+      <div class="eyebrow hero-eyebrow i18n" data-en="Construction &amp; Design — Yerevan, Armenia" data-ru="Строительство и проектирование — Ереван, Армения">Construction &amp; Design — Yerevan, Armenia</div>
+      <h1 class="i18n" data-en="From Foundation <em>to</em> Finish." data-ru="От Фундамента <em>до</em> Отделки.">From Foundation <em>to</em> Finish.</h1>
+      <p class="hero-desc i18n" data-en="Shamal Shin plans, builds, and supervises houses, apartments, villas, and agricultural structures across Armenia — design, workforce, welding, and execution, managed under one roof." data-ru="Shamal Shin проектирует, строит и контролирует дома, квартиры, виллы и хозяйственные постройки по всей Армении — дизайн, персонал, сварка и реализация под единым управлением.">Shamal Shin plans, builds, and supervises houses, apartments, villas, and agricultural structures across Armenia — design, workforce, welding, and execution, managed under one roof.</p>
+      <p class="hero-ru i18n-hide-ru">Строительство и проектирование — полный цикл, Ереван.</p>
       <div class="hero-ctas">
-        <a href="#projects" class="btn btn-solid">View Projects</a>
-        <a href="#contact" class="btn btn-ghost">Start a Project</a>
+        <a href="#projects" class="btn btn-solid i18n" data-en="View Projects" data-ru="Смотреть проекты">View Projects</a>
+        <a href="#contact" class="btn btn-ghost i18n" data-en="Start a Project" data-ru="Начать проект">Start a Project</a>
       </div>
       <div class="hero-meta">
-        <span><strong>Design + Build</strong>Full-cycle project support</span>
-        <span><strong>On-Site</strong>Direct supervision &amp; labor</span>
-        <span><strong>EN / RU</strong>Yerevan, Armenia</span>
+        <span><strong class="i18n" data-en="Design + Build" data-ru="Проект + Стройка">Design + Build</strong><span class="i18n" data-en="Full-cycle project support" data-ru="Полное сопровождение проекта">Full-cycle project support</span></span>
+        <span><strong class="i18n" data-en="On-Site" data-ru="На объекте">On-Site</strong><span class="i18n" data-en="Direct supervision &amp; labor" data-ru="Прямой надзор и рабочая сила">Direct supervision &amp; labor</span></span>
+        <span><strong>EN / RU</strong><span class="i18n" data-en="Yerevan, Armenia" data-ru="Ереван, Армения">Yerevan, Armenia</span></span>
       </div>
     </div>
     <div class="hero-right">
@@ -674,33 +765,33 @@
   </section>
 
   <!-- ABOUT -->
-  <section id="about">
+  <section id="about" class="app-page" style="display:none;">
     <div class="wrap">
       <div class="section-head">
-        <h2>Built by people who work the site, not just the drawing.</h2>
+        <h2 class="i18n" data-en="Built by people who work the site, not just the drawing." data-ru="Строим руками тех, кто работает на объекте, а не только над чертежом.">Built by people who work the site, not just the drawing.</h2>
       </div>
       <div class="about-grid">
         <div class="about-copy">
-          <p>Shamal Shin is a construction and design company based in Yerevan, led by Shamal Dolatkhah (Mojtaba). We take on the full scope of a build — from initial design and planning through on-site supervision, skilled labor, welding and metalwork, to final execution and handover.</p>
-          <p>We work across residential and agricultural projects: private houses, apartment buildings, villas, sheds and utility structures. Every project is managed directly, with one point of contact from first drawing to final wall.</p>
-          <p style="color:var(--silver); font-family:var(--font-mono); font-size:12.5px;">Работаем на английском и русском языках.</p>
+          <p class="i18n" data-en="Shamal Shin is a construction and design company based in Yerevan, led by Shamal Dolatkhah (Mojtaba). We take on the full scope of a build — from initial design and planning through on-site supervision, skilled labor, welding and metalwork, to final execution and handover." data-ru="Shamal Shin — строительная и проектная компания в Ереване, под руководством Шамала Долатхах (Моджтаба). Мы берём на себя полный цикл строительства — от проектирования и планирования до надзора на объекте, рабочей силы, сварки и итоговой сдачи объекта.">Shamal Shin is a construction and design company based in Yerevan, led by Shamal Dolatkhah (Mojtaba). We take on the full scope of a build — from initial design and planning through on-site supervision, skilled labor, welding and metalwork, to final execution and handover.</p>
+          <p class="i18n" data-en="We work across residential and agricultural projects: private houses, apartment buildings, villas, sheds and utility structures. Every project is managed directly, with one point of contact from first drawing to final wall." data-ru="Мы работаем с жилыми и хозяйственными объектами: частные дома, многоквартирные здания, виллы, ангары и хозяйственные постройки. Каждый проект ведётся напрямую — один ответственный контакт от первого чертежа до последней стены.">We work across residential and agricultural projects: private houses, apartment buildings, villas, sheds and utility structures. Every project is managed directly, with one point of contact from first drawing to final wall.</p>
+          <p class="i18n-hide-ru" style="color:var(--silver); font-family:var(--font-mono); font-size:12.5px;">Работаем на английском и русском языках.</p>
         </div>
         <div class="about-stats">
           <div class="stat">
             <div class="stat-num">01</div>
-            <div class="stat-label">Point of Contact</div>
+            <div class="stat-label i18n" data-en="Point of Contact" data-ru="Единый контакт">Point of Contact</div>
           </div>
           <div class="stat">
             <div class="stat-num">EN/RU</div>
-            <div class="stat-label">Languages Spoken</div>
+            <div class="stat-label i18n" data-en="Languages Spoken" data-ru="Языки общения">Languages Spoken</div>
           </div>
           <div class="stat">
             <div class="stat-num">100%</div>
-            <div class="stat-label">On-Site Supervision</div>
+            <div class="stat-label i18n" data-en="On-Site Supervision" data-ru="Надзор на объекте">On-Site Supervision</div>
           </div>
           <div class="stat">
             <div class="stat-num">YSN</div>
-            <div class="stat-label">Based in Yerevan</div>
+            <div class="stat-label i18n" data-en="Based in Yerevan" data-ru="Базируемся в Ереване">Based in Yerevan</div>
           </div>
         </div>
       </div>
@@ -708,53 +799,53 @@
   </section>
 
   <!-- SERVICES -->
-  <section id="services">
+  <section id="services" class="app-page" style="display:none;">
     <div class="wrap">
       <div class="section-head">
-        <h2>Services</h2>
-        <p>Six disciplines, coordinated as one project — not six separate contractors.</p>
+        <h2 class="i18n" data-en="Services" data-ru="Услуги">Services</h2>
+        <p class="i18n" data-en="Six disciplines, coordinated as one project — not six separate contractors." data-ru="Шесть направлений, объединённых в единый проект — а не шесть разных подрядчиков.">Six disciplines, coordinated as one project — not six separate contractors.</p>
       </div>
       <div class="services-list">
         <div class="service-row">
           <div class="service-num">01</div>
-          <div class="service-name">Design</div>
-          <div class="service-desc">Planning and design work for residential and agricultural structures, developed around how the space will actually be used.</div>
+          <div class="service-name i18n" data-en="Design" data-ru="Проектирование">Design</div>
+          <div class="service-desc i18n" data-en="Planning and design work for residential and agricultural structures, developed around how the space will actually be used." data-ru="Планирование и проектирование жилых и хозяйственных объектов — исходя из того, как пространство будет использоваться на практике.">Planning and design work for residential and agricultural structures, developed around how the space will actually be used.</div>
         </div>
         <div class="service-row">
           <div class="service-num">02</div>
-          <div class="service-name">Supervision</div>
-          <div class="service-desc">Direct, on-site oversight through every phase of construction — quality, sequencing, and safety kept under one authority.</div>
+          <div class="service-name i18n" data-en="Supervision" data-ru="Надзор">Supervision</div>
+          <div class="service-desc i18n" data-en="Direct, on-site oversight through every phase of construction — quality, sequencing, and safety kept under one authority." data-ru="Прямой контроль на объекте на всех этапах строительства — качество, последовательность работ и безопасность под единым управлением.">Direct, on-site oversight through every phase of construction — quality, sequencing, and safety kept under one authority.</div>
         </div>
         <div class="service-row">
           <div class="service-num">03</div>
-          <div class="service-name">Execution</div>
-          <div class="service-desc">Hands-on construction and build-out, from groundwork to finishing, carried out by our own coordinated teams.</div>
+          <div class="service-name i18n" data-en="Execution" data-ru="Реализация">Execution</div>
+          <div class="service-desc i18n" data-en="Hands-on construction and build-out, from groundwork to finishing, carried out by our own coordinated teams." data-ru="Непосредственное строительство и отделка — от земляных работ до финишной отделки, силами наших собственных команд.">Hands-on construction and build-out, from groundwork to finishing, carried out by our own coordinated teams.</div>
         </div>
         <div class="service-row">
           <div class="service-num">04</div>
-          <div class="service-name">Labor Coordination</div>
-          <div class="service-desc">Skilled workers organized and managed as one crew, scheduled against a single project timeline.</div>
+          <div class="service-name i18n" data-en="Labor Coordination" data-ru="Координация рабочей силы">Labor Coordination</div>
+          <div class="service-desc i18n" data-en="Skilled workers organized and managed as one crew, scheduled against a single project timeline." data-ru="Квалифицированные рабочие организованы как единая бригада, работающая по общему графику проекта.">Skilled workers organized and managed as one crew, scheduled against a single project timeline.</div>
         </div>
         <div class="service-row">
           <div class="service-num">05</div>
-          <div class="service-name">Houses, Apartments &amp; Villas</div>
-          <div class="service-desc">Full builds for private houses, apartment projects, and villas, from foundation through handover.</div>
+          <div class="service-name i18n" data-en="Houses, Apartments &amp; Villas" data-ru="Дома, квартиры и виллы">Houses, Apartments &amp; Villas</div>
+          <div class="service-desc i18n" data-en="Full builds for private houses, apartment projects, and villas, from foundation through handover." data-ru="Строительство «под ключ» частных домов, многоквартирных объектов и вилл — от фундамента до сдачи.">Full builds for private houses, apartment projects, and villas, from foundation through handover.</div>
         </div>
         <div class="service-row">
           <div class="service-num">06</div>
-          <div class="service-name">Welding &amp; Metalwork</div>
-          <div class="service-desc">Structural welding and metal fabrication, including sheds and agricultural structures built to hold up under real use.</div>
+          <div class="service-name i18n" data-en="Welding &amp; Metalwork" data-ru="Сварка и металлоконструкции">Welding &amp; Metalwork</div>
+          <div class="service-desc i18n" data-en="Structural welding and metal fabrication, including sheds and agricultural structures built to hold up under real use." data-ru="Конструкционная сварка и металлообработка, включая ангары и хозяйственные постройки, рассчитанные на реальную эксплуатацию.">Structural welding and metal fabrication, including sheds and agricultural structures built to hold up under real use.</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- PROJECTS / GALLERY -->
-  <section id="projects">
+  <section id="projects" class="app-page" style="display:none;">
     <div class="wrap">
       <div class="section-head">
-        <h2>Projects</h2>
-        <p>A living record of what we build. Photos from active and completed sites are added here as projects close out.</p>
+        <h2 class="i18n" data-en="Projects" data-ru="Проекты">Projects</h2>
+        <p class="i18n" data-en="A living record of what we build. Photos from active and completed sites are added here as projects close out." data-ru="Живая летопись наших объектов. Фотографии с текущих и завершённых площадок добавляются по мере закрытия проектов.">A living record of what we build. Photos from active and completed sites are added here as projects close out.</p>
       </div>
       <div class="gallery-grid">
 
@@ -764,8 +855,8 @@
           <div class="panel-corner bl"></div><div class="panel-corner br"></div>
           <div class="panel-top"><span>H-01</span><span>ДОМА</span></div>
           <div class="panel-bottom">
-            <div class="panel-cat">Houses</div>
-            <div class="panel-status">Completed project</div>
+            <div class="panel-cat i18n" data-en="Houses" data-ru="Дома">Houses</div>
+            <div class="panel-status i18n" data-en="Completed project" data-ru="Завершённый проект">Completed project</div>
           </div>
         </div>
 
@@ -775,8 +866,8 @@
           <div class="panel-corner bl"></div><div class="panel-corner br"></div>
           <div class="panel-top"><span>A-01</span><span>КВАРТИРЫ</span></div>
           <div class="panel-bottom">
-            <div class="panel-cat">Hotel Apartments — "ABNUS"</div>
-            <div class="panel-status">Working project</div>
+            <div class="panel-cat i18n" data-en='Hotel Apartments — "ABNUS"' data-ru="Гостиничные апартаменты — «ABNUS»">Hotel Apartments — "ABNUS"</div>
+            <div class="panel-status i18n" data-en="Working project" data-ru="В работе">Working project</div>
           </div>
         </div>
 
@@ -786,8 +877,8 @@
           <div class="panel-corner bl"></div><div class="panel-corner br"></div>
           <div class="panel-top"><span>V-01</span><span>ВИЛЛЫ</span></div>
           <div class="panel-bottom">
-            <div class="panel-cat">Villas</div>
-            <div class="panel-status">Design concept</div>
+            <div class="panel-cat i18n" data-en="Villas" data-ru="Виллы">Villas</div>
+            <div class="panel-status i18n" data-en="Design concept" data-ru="Концепт проекта">Design concept</div>
           </div>
         </div>
 
@@ -797,8 +888,8 @@
           <div class="panel-corner bl"></div><div class="panel-corner br"></div>
           <div class="panel-top"><span>S-01</span><span>АНГАРЫ</span></div>
           <div class="panel-bottom">
-            <div class="panel-cat">Sheds &amp; Industrial </div>
-            <div class="panel-status">Working project</div>
+            <div class="panel-cat i18n" data-en="Sheds &amp; Industrial" data-ru="Ангары и промышленные объекты">Sheds &amp; Industrial </div>
+            <div class="panel-status i18n" data-en="Working project" data-ru="В работе">Working project</div>
           </div>
         </div>
 
@@ -808,8 +899,8 @@
           <div class="panel-corner bl"></div><div class="panel-corner br"></div>
           <div class="panel-top"><span>W-01</span><span>СВАРКА</span></div>
           <div class="panel-bottom">
-            <div class="panel-cat">Welding &amp; Metalwork</div>
-            <div class="panel-status">Completed project</div>
+            <div class="panel-cat i18n" data-en="Welding &amp; Metalwork" data-ru="Сварка и металлоконструкции">Welding &amp; Metalwork</div>
+            <div class="panel-status i18n" data-en="Completed project" data-ru="Завершённый проект">Completed project</div>
           </div>
         </div>
 
@@ -819,8 +910,8 @@
           <div class="panel-corner bl"></div><div class="panel-corner br"></div>
           <div class="panel-top"><span>P-01</span><span>ПРОЦЕСС</span></div>
           <div class="panel-bottom">
-            <div class="panel-cat">Site &amp; Process</div>
-            <div class="panel-status">Active site</div>
+            <div class="panel-cat i18n" data-en="Site &amp; Process" data-ru="Площадка и процесс">Site &amp; Process</div>
+            <div class="panel-status i18n" data-en="Active site" data-ru="Активная площадка">Active site</div>
           </div>
         </div>
 
@@ -829,49 +920,49 @@
   </section>
 
   <!-- PROCESS -->
-  <section id="process">
+  <section id="process" class="app-page" style="display:none;">
     <div class="wrap">
       <div class="section-head">
-        <h2>How a project moves</h2>
-        <p>The same sequence, every time — so nothing depends on memory or improvisation.</p>
+        <h2 class="i18n" data-en="How a project moves" data-ru="Как движется проект">How a project moves</h2>
+        <p class="i18n" data-en="The same sequence, every time — so nothing depends on memory or improvisation." data-ru="Одна и та же последовательность каждый раз — ничего не зависит от памяти или импровизации.">The same sequence, every time — so nothing depends on memory or improvisation.</p>
       </div>
       <div class="process-list">
         <div class="process-step">
           <div class="process-index">01</div>
-          <div><div class="process-title">Consultation</div><div class="process-desc">We review the site, the goal, and the constraints before anything is drawn.</div></div>
+          <div><div class="process-title i18n" data-en="Consultation" data-ru="Консультация">Consultation</div><div class="process-desc i18n" data-en="We review the site, the goal, and the constraints before anything is drawn." data-ru="Мы изучаем участок, цель и ограничения ещё до начала проектирования.">We review the site, the goal, and the constraints before anything is drawn.</div></div>
         </div>
         <div class="process-step">
           <div class="process-index">02</div>
-          <div><div class="process-title">Design &amp; Planning</div><div class="process-desc">A design is developed and agreed on before ground is broken.</div></div>
+          <div><div class="process-title i18n" data-en="Design &amp; Planning" data-ru="Проектирование и планирование">Design &amp; Planning</div><div class="process-desc i18n" data-en="A design is developed and agreed on before ground is broken." data-ru="Проект разрабатывается и согласовывается до начала земляных работ.">A design is developed and agreed on before ground is broken.</div></div>
         </div>
         <div class="process-step">
           <div class="process-index">03</div>
-          <div><div class="process-title">Supervision &amp; Execution</div><div class="process-desc">Our crews build, weld, and finish, supervised on-site from start to close.</div></div>
+          <div><div class="process-title i18n" data-en="Supervision &amp; Execution" data-ru="Надзор и реализация">Supervision &amp; Execution</div><div class="process-desc i18n" data-en="Our crews build, weld, and finish, supervised on-site from start to close." data-ru="Наши бригады строят, варят и отделывают объект под надзором на площадке от начала до сдачи.">Our crews build, weld, and finish, supervised on-site from start to close.</div></div>
         </div>
         <div class="process-step">
           <div class="process-index">04</div>
-          <div><div class="process-title">Handover</div><div class="process-desc">A completed, inspected structure — ready to use.</div></div>
+          <div><div class="process-title i18n" data-en="Handover" data-ru="Сдача объекта">Handover</div><div class="process-desc i18n" data-en="A completed, inspected structure — ready to use." data-ru="Готовое, проверенное сооружение — готово к эксплуатации.">A completed, inspected structure — ready to use.</div></div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact">
+  <section id="contact" class="app-page" style="display:none;">
     <div class="wrap contact-grid">
       <div>
-        <div class="eyebrow">Contact</div>
-        <h2 class="contact-title" style="margin-top:20px;">Tell us what you're building.</h2>
-        <p class="contact-sub">Reach out directly — by phone, WhatsApp, or email. We respond in English or Russian.</p>
-        <p class="contact-sub" style="font-family:var(--font-mono); font-size:12px; color:var(--steel-soft); margin-top:30px;">Свяжитесь с нами — по телефону, WhatsApp или email.</p>
+        <div class="eyebrow i18n" data-en="Contact" data-ru="Контакты">Contact</div>
+        <h2 class="contact-title i18n" data-en="Tell us what you're building." data-ru="Расскажите, что вы строите." style="margin-top:20px;">Tell us what you're building.</h2>
+        <p class="contact-sub i18n" data-en="Reach out directly — by phone, WhatsApp, or email. We respond in English or Russian." data-ru="Свяжитесь напрямую — по телефону, WhatsApp или email. Отвечаем на английском и русском.">Reach out directly — by phone, WhatsApp, or email. We respond in English or Russian.</p>
+        <p class="contact-sub i18n-hide-ru" style="font-family:var(--font-mono); font-size:12px; color:var(--steel-soft); margin-top:30px;">Свяжитесь с нами — по телефону, WhatsApp или email.</p>
       </div>
       <div class="contact-list">
         <div class="contact-item">
-          <span class="label">Phone</span>
+          <span class="label i18n" data-en="Phone" data-ru="Телефон">Phone</span>
           <a class="value" href="tel:+37496472300">+374 96 472300</a>
         </div>
         <div class="contact-item">
-          <span class="label">Phone</span>
+          <span class="label i18n" data-en="Phone" data-ru="Телефон">Phone</span>
           <a class="value" href="tel:+37499472300">+374 99 472300</a>
         </div>
         <div class="contact-item">
@@ -883,8 +974,8 @@
           <a class="value" href="mailto:ShamalShin24@gmail.com">ShamalShin24@gmail.com</a>
         </div>
         <div class="contact-item">
-          <span class="label">Location</span>
-          <span class="value">Yerevan, Armenia</span>
+          <span class="label i18n" data-en="Location" data-ru="Локация">Location</span>
+          <span class="value i18n" data-en="Yerevan, Armenia" data-ru="Ереван, Армения">Yerevan, Armenia</span>
         </div>
       </div>
     </div>
@@ -895,12 +986,77 @@
 <footer>
   <div class="wrap footer-row">
     <div class="footer-brand">SHAMAL SHIN LLC</div>
-    <div class="footer-meta">YEREVAN, ARMENIA — © <span id="year"></span> SHAMAL SHIN. ALL RIGHTS RESERVED.</div>
+    <div class="footer-meta"><span class="i18n" data-en="YEREVAN, ARMENIA — © " data-ru="ЕРЕВАН, АРМЕНИЯ — © ">YEREVAN, ARMENIA — © </span><span id="year"></span><span class="i18n" data-en=" SHAMAL SHIN. ALL RIGHTS RESERVED." data-ru=" SHAMAL SHIN. ВСЕ ПРАВА ЗАЩИЩЕНЫ.">&nbsp;SHAMAL SHIN. ALL RIGHTS RESERVED.</span></div>
   </div>
 </footer>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ---- Language switch ---- */
+  var flagBtns = document.querySelectorAll('.flag-btn');
+
+  function setLang(lang){
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.i18n').forEach(function(el){
+      var txt = el.dataset[lang];
+      if (txt !== undefined) el.innerHTML = txt;
+    });
+    document.querySelectorAll('.i18n-hide-ru').forEach(function(el){
+      el.style.display = (lang === 'ru') ? 'none' : '';
+    });
+    flagBtns.forEach(function(b){
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+  }
+
+  flagBtns.forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.dataset.lang); });
+  });
+
+  /* ---- Page navigation (single-page "tabs" behave like separate pages) ---- */
+  var pageIds = ['home','about','services','projects','process','contact'];
+  var pages = document.querySelectorAll('.app-page');
+  var navAnchors = document.querySelectorAll('.nav-links a, .nav-cta, .hero-ctas a, .brand');
+  var navLinksPanel = document.querySelector('.nav-links');
+  var navToggleBtn = document.querySelector('.nav-toggle-btn');
+
+  function showPage(id){
+    if (pageIds.indexOf(id) === -1) id = 'home';
+    pages.forEach(function(p){
+      p.style.display = (p.id === id) ? '' : 'none';
+    });
+    navAnchors.forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+    });
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    history.replaceState(null, '', '#' + id);
+    if (navLinksPanel) navLinksPanel.classList.remove('open');
+    if (navToggleBtn) navToggleBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  navAnchors.forEach(function(a){
+    var id = (a.getAttribute('href') || '').replace('#', '');
+    if (pageIds.indexOf(id) !== -1){
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        showPage(id);
+      });
+    }
+  });
+
+  if (navToggleBtn && navLinksPanel){
+    navToggleBtn.addEventListener('click', function(){
+      var open = navLinksPanel.classList.toggle('open');
+      navToggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  window.addEventListener('popstate', function(){
+    showPage(location.hash.replace('#','') || 'home');
+  });
+
+  showPage(location.hash.replace('#','') || 'home');
 </script>
 
 </body>
